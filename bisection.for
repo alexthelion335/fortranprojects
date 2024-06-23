@@ -1,6 +1,10 @@
+C BISECTION ROOT FINDING METHOD IMPLEMENTED USING FORTRAN
+C ALEX KINCH
+C BASED ON MATLAB PROGRAM FROM DR. OSAMA ALKHATEEB
+C JUNE 23, 2024
       program bisectionprog
       implicit none
-      real:: f,epsilon,up,lo,n,m,eA,vr,vrold,fdm,fdl,fdu
+      real:: f,epsilon,up,lo,n,m,eA,vr,vrold,fdm,fdl,fdu,condition
 C ALLOWED ERROR
       epsilon = 0.0001*100
 C UPPER AND LOWER BOUNDS
@@ -29,14 +33,16 @@ C VALUE AT LOWER BOUND
 C VALUE AT UPPER BOUND
         fdu = f(up)
 C IF CROSSES X AXIS IN LOWER HALF, MAKE MIDPT UPPER BOUND
-        if (fdm*fdl .LT. 0) then
+        condition = fdm*fdl
+        print *,'CONDITION: ',condition
+        if (condition .LT. 0) then
           up = vr
         else
           lo = vr
         endif
 C OLD ROOT VARIABLE
         vrold = vr
-        print *,'ITERATION #',n,'\n'
+        print *,'ITERATION #',n
         print *,'LOW BOUND: ',lo,' LOW VALUE: ',fdl
         print *,'MID POINT: ',vr,' MID VALUE: ',fdm
         print *,'UPR BOUND: ',up,' UPR VALUE: ',fdu
