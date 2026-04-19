@@ -3,7 +3,7 @@ C Using Chudnovsky Series
 C Alex Kinch, April 18, 2026
       program picalc
       implicit none
-                  real(kind=16) pi, x
+                  real(kind=16) pi, x, pitemp
                   real(kind=16) fact
                   external fact
                   integer q
@@ -15,6 +15,9 @@ C Alex Kinch, April 18, 2026
      1    (545140134.0_16*q + 13591409.0_16)) /
      1    (fact(3*q) * (fact(q))**3 *
      1    (640320.0_16**(3*q + 1.5_16))))
+
+      pitemp = 1.0_16 / (12.0_16 * x)
+      print *, 'ITERATION ', q, 'PI = ', pitemp
       end do
 C      do q = 0, 1000000000, 1
 C        pi4 = pi4 + sign * (1 / denom)
